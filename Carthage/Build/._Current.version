@@ -1,0 +1,19 @@
+{
+  "Mac" : [
+
+  ],
+  "watchOS" : [
+
+  ],
+  "tvOS" : [
+
+  ],
+  "commitish" : "973c7216a304fb45df456ddfc5fa2573587d5f8c",
+  "iOS" : [
+    {
+      "name" : "CDatePicker",
+      "hash" : "19432b4c796e1d90b67980d98259e84700eb7e6837a748f84b7a48449ce37a19",
+      "swiftToolchainVersion" : "5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
+    }
+  ]
+}

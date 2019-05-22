@@ -1,0 +1,11 @@
+framework module CDatePicker {
+  umbrella header "CDatePicker.h"
+
+  export *
+  module * { export * }
+}
+
+module CDatePicker.Swift {
+    header "CDatePicker-Swift.h"
+    requires objc
+}
