@@ -12,11 +12,15 @@ import UIKit
 public class CustomizableDataPicker: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSource {
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        dataSource = self
+        delegate = self
         setup()
     }
     
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        dataSource = self
+        delegate = self
         setup()
     }
     
@@ -24,19 +28,29 @@ public class CustomizableDataPicker: UIPickerView, UIPickerViewDelegate, UIPicke
         data = [["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"],
                       ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
                       getYears()]
-        
-        dataSource = self
-        delegate = self
-        
+    
         selectRow(201 * data[0].count, inComponent: 0, animated: false)
         selectRow(201 * data[1].count, inComponent: 1, animated: false)
         selectRow(201 * data[2].count + (initialSelectedYear - startYear), inComponent: 2, animated: false)
     }
-
-    public var startYear: Int = 1900
-    public var endYear: Int = 2100
     
-    public var initialSelectedYear: Int = 2000
+    public var startYear: Int = 1900 {
+        didSet {
+            setup()
+        }
+    }
+    
+    public var endYear: Int = 2100 {
+        didSet {
+            setup()
+        }
+    }
+    
+    public var initialSelectedYear: Int = 2000 {
+        didSet {
+            setup()
+        }
+    }
     
     var data: [[String]] = [[String]]()
     
@@ -49,7 +63,6 @@ public class CustomizableDataPicker: UIPickerView, UIPickerViewDelegate, UIPicke
     public var textColor: UIColor = UIColor.black
     
     public var date: Date = Date()
-    
     
     private func getYears() -> [String]{
         var years: [String] = [String]()
