@@ -24,6 +24,7 @@ class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(dateChanged(_:)), name: Notification.Name.CDatePickerValueChanged, object: picker)
         
         picker.endYear = 2019
+
     }
 
     @objc func dateChanged(_ notification:Notification) {

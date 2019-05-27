@@ -32,6 +32,10 @@ public class CustomizableDataPicker: UIPickerView, UIPickerViewDelegate, UIPicke
         selectRow(201 * data[0].count, inComponent: 0, animated: false)
         selectRow(201 * data[1].count, inComponent: 1, animated: false)
         selectRow(201 * data[2].count + (initialSelectedYear - startYear), inComponent: 2, animated: false)
+        
+        day = (selectedRow(inComponent: 0) % data[0].count) + 1
+        month = (selectedRow(inComponent: 1) % data[1].count) + 1
+        year = (selectedRow(inComponent: 2) % data[2].count) + startYear
     }
     
     public var startYear: Int = 1900 {
@@ -62,7 +66,13 @@ public class CustomizableDataPicker: UIPickerView, UIPickerViewDelegate, UIPicke
     
     public var textColor: UIColor = UIColor.black
     
-    public var date: Date = Date()
+    public var date: Date {
+        get {
+            let calendar = Calendar(identifier: .gregorian)
+            let components = DateComponents(year: year, month: month, day: day)
+            return calendar.date(from: components) ?? Date()
+        }
+    }
     
     private func getYears() -> [String]{
         var years: [String] = [String]()
@@ -96,14 +106,9 @@ public class CustomizableDataPicker: UIPickerView, UIPickerViewDelegate, UIPicke
             return
         }
         
-        let calendar = Calendar(identifier: .gregorian)
-        let components = DateComponents(year: year, month: month, day: day)
-        date = calendar.date(from: components) ?? Date()
-        
         NotificationCenter.default.post(name: .CDatePickerValueChanged, object: self)
         //let comps = calendar.dateComponents([.year, .month, .day], from: date)
         //print("Y: \(comps.year ?? 0) M: \(comps.month ?? 0) D: \(comps.day ?? 0)")
-        
     }
     
     public func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
